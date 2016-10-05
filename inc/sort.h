@@ -9,7 +9,16 @@
 #define SORT_H_
 
 #include <stdlib.h>
+#include <limits.h>
 
-void bubbleSort(long int *arr, int len);
+/** searching **/
+long int linearSearch(long int *arr, long int len, long int key);
+long int binarySearch(long int *arr, long int len, long int key);
+
+
+void bubbleSort(long int *arr, long int len);
+void insertionSort(long int *arr, long int len);
+void selectionSort(long int *arr, long int len);
+void mergeSort(long int *arr, long int lowerIndex, long int upperIndex);
 
 #endif /* SORT_H_ */
