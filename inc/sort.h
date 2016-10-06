@@ -12,6 +12,7 @@
 #include <limits.h>
 
 /** searching **/
+
 long int linearSearch(long int *arr, long int len, long int key);
 long int binarySearch(long int *arr, long int len, long int key);
 

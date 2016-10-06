@@ -9,6 +9,10 @@
 #include "../inc/sort.h"
 
 
+/**
+ * Linear Search is based concept of searching every element through array and comparing it to the key.
+ * If element is found then its position is returned else -1 is returned.
+ */
 long int linearSearch(long int *arr, long int len, long int key){
 	long int i;
 	for( i = 0; i < len; i++){
@@ -18,14 +22,18 @@ long int linearSearch(long int *arr, long int len, long int key){
 }
 
 
-
+/**
+ * Binary Search algorithm is only applicable on sorted arrays. The search range is reduced to half every time if it is known that the key cannot be present in
+ * any one half of the sub-array. This comparison takes place of value of key and of the arrays elements/
+ */
 long int binarySearch(long int *arr, long int len, long int key){
 	long int lower = 0, upper = len-1;
 	while( lower <= upper){
+
 		long int mid = (lower + upper)/2;
 		if(arr[mid] == key)			return mid;
-		else if( key < arr[mid])	upper = mid-1;
-		else						lower = mid+1;
+		else if( key < arr[mid])	upper = mid-1;	/* reduce range if not present in second half*/
+		else						lower = mid+1;	/* reduce range if not present in first half */
 	}
 
 	return -1;
@@ -33,11 +41,14 @@ long int binarySearch(long int *arr, long int len, long int key){
 }
 
 
-
+/**
+ * Bubble Sort involves shifting the largest element to the last position, second largest to second last
+ * position and so on. This is done by comparing the adjacent elements and swapping them according to their value.
+ */
 void bubbleSort(long int *arr, long int len){
 	long int i, j;
-	for(i = 0; i < len - 1; i++){
-		for(j = 0; j < len - 1 - i; j++){
+	for(i = 0; i < len - 1; i++){		/** shifting ith largest element **/
+		for(j = 0; j < len - 1 - i; j++){	/** shifting from begining to to last - shifted positions **/
 			if(arr[j] > arr[j+1]){
 				long int temp = arr[j];
 				arr[j]	 = arr[j+1];
@@ -48,13 +59,19 @@ void bubbleSort(long int *arr, long int len){
 }
 
 
+
+/** Selection Sort involves finding the smallest, second smallest ... elements in the array and placing them
+ * at the initial position of 0, 1, 2 ... and so on.
+ */
 void selectionSort(long int *arr, long int len){
 	long int i, j;
 	for(i = 0; i < len-1; i++){
 		long int smallestPos = i;
-		for(j = i+1; j < len; j++){
+		for(j = i+1; j < len; j++){					/** finding ith smallest element **/
 			if(arr[smallestPos] > arr[j])		smallestPos = j;
 		}
+
+		/** placing the smallest element at ith position **/
 		long int smallest = arr[smallestPos];
 		arr[smallestPos] =  arr[i];
 		arr[i] = smallest;
@@ -63,13 +80,17 @@ void selectionSort(long int *arr, long int len){
 }
 
 
-
+/** Insertion Sort involves picking up the elements from the start and placing them at their correct position in the sub-array
+ * formed by beginning of original array to that element's position in original array. The sub-array elements are adjusted when the
+ * key element is placed in that array.
+ */
 void insertionSort(long int *arr, long int len){
 	long int i;
 
 	for(i = 1; i < len-1; i++){
-		long int key = arr[i];
+		long int key = arr[i];			/* pick up element**/
 		long int j = i-1;
+		/** shifting of adjacent elements only if they are larger **/
 		while( j >= 0 && key > arr[j] )			arr[i] = arr[j--];
 		arr[j+1] = key;
 	}
@@ -78,7 +99,10 @@ void insertionSort(long int *arr, long int len){
 
 
 
-
+/**
+ * This is a sub-process of merge sort algorithms. This involves copying of the two halves of the original array into new array,
+ *  comparing their each elements and placing them in sorted order in main array.
+ */
 static void merge(long int *arr, long int p, long int q, long int r ){
 
 	long int n1 = q - p + 1, n2 = r - q, i;
@@ -89,14 +113,18 @@ static void merge(long int *arr, long int p, long int q, long int r ){
 	for( i = 0; i < n2; i++)		subArr2[i] = arr[q+1+i];
 	subArr1[n1] = subArr2[n2] = LONG_MAX;
 
+	/** comparing and inserting into array using sentinels **/
 	long int j = 0, k = 0;
 	for(i = p; i <= r; i++){
-		if(j >= n1 || subArr1[j] > subArr2[k])	arr[i] = subArr2[k++];
-else 	if(k >= n2 || subArr1[j] < subArr2[k])	arr[i] = subArr1[j++];
+		if(subArr1[j] > subArr2[k])	arr[i] = subArr2[k++];
+else 								arr[i] = subArr1[j++];
 	}
 }
 
-
+/** Merge sort works on divide and conquer technique. It breaks the array into two sub-arrays, compares them and then
+ * places them into the original array into sorted order. The breaking takes places in this function while comparison and merging
+ * takes place in merge function
+ */
 void mergeSort(long int *arr, long int p, long int q){
 
 if(p < q){
@@ -108,18 +136,24 @@ if(p < q){
 }
 
 
-
-
-
+/**
+ * This function is sub-algorithm of heap sort. It is used to maintain the max-heap property at
+ * a particular node. If the node is not consistent, then it is corrected and by replacing it with child and
+ * the sub-tree starting from its child is again checked for maintenance of this property.
+ */
 void maxHeapify(long int *arr, long int index, long int heapSize){
-	long int leftIndex = (2 * index), rightIndex = ( 2 * index + 1);
 
+	/** heap according to zero index, here element at index = root of sub-heap **/
+	long int leftIndex = (index << 1) + 1, rightIndex =  (index << 1 ) + 2;
 	long int largestIndex;
+
+	/** search largest among parent, right and left **/
 	if(leftIndex < heapSize && arr[leftIndex] > arr[index])		largestIndex = leftIndex;
 	else														largestIndex = index;
 
 	if(rightIndex < heapSize && arr[rightIndex] > arr[largestIndex])	largestIndex = rightIndex;
 
+	/** exchange larger with root and heapify sub-heap **/
 	if(largestIndex != index){
 		long int temp 		= arr[index];
 		arr[index] 			= arr[largestIndex];
@@ -128,7 +162,29 @@ void maxHeapify(long int *arr, long int index, long int heapSize){
 	}
 }
 
+/**
+ * Heap Sort builds a heap, and then replaces the largest element present at the root of heap with the last element of
+ * the array. Then it heapifies the array validating and correcting the max-heap property. It reduces the heap size by 1 o that
+ * the last element which is in its correct position is no longer considered part of heap.
+ * The final array obtained is sorted array.
+ */
+void heapSort(long int *arr, long int heapSize){
+	long int i;
+	/** build max heap **/
 
-void heapSort(long int *arr, long int heapSize){}
+	/** (heapSize - 2 )/ 2 is last parent node for zero indexing**/
+	for(i = (heapSize-2)/2; i >= 0; i--){
+		maxHeapify(arr, i, heapSize);
+	}
+
+	/** exchanging the first node with heapSize -1th node **/
+	for(i = heapSize-1; i > 0; i-- ){
+		long int temp = arr[i];
+		arr[i] = arr[0];
+		arr[0] = temp;
+		maxHeapify(arr, 0, --heapSize);
+	}
+
+}
 
 
