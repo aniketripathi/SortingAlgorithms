@@ -10,16 +10,19 @@
 
 #include <stdlib.h>
 #include <limits.h>
+#include <time.h>
 
 /** searching **/
 
 long int linearSearch(long int *arr, long int len, long int key);
 long int binarySearch(long int *arr, long int len, long int key);
+long int randomSearch(long int *arr, long int len, long int key);
 
 
 void bubbleSort(long int *arr, long int len);
 void insertionSort(long int *arr, long int len);
 void selectionSort(long int *arr, long int len);
 void mergeSort(long int *arr, long int lowerIndex, long int upperIndex);
+void heapSort(long int *arr, long int len);
 
 #endif /* SORT_H_ */

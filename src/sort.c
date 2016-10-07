@@ -41,6 +41,36 @@ long int binarySearch(long int *arr, long int len, long int key){
 }
 
 
+/** random function generates a random number between min and max **/
+static long int random(long int min, long int max){
+	static int isSeeded = 0;
+	if(!isSeeded){
+		srand(time(NULL));
+		isSeeded = 1;
+
+	}
+	return (long int) ( ((double)(max - min)/RAND_MAX )* rand() + min);
+}
+
+/**
+ * Random Search involves randomly generating a number which behaves as an index greater than present index which is used to make
+ * leaps of indexes while moving forward linearly in a sorted array. If the number at random index is lesser than key then it sets
+ * current index to random index.
+ */
+long int randomSearch(long int *arr, long int len, long int key){
+	long int i = 0, j;
+	while(i < len){
+		if( arr[i] == key)			return i;
+		j = random(i, len);
+		if(j > i && arr[j] <= key)	i = j;
+		else	++i;
+	}
+	return -1;
+}
+
+
+
+
 /**
  * Bubble Sort involves shifting the largest element to the last position, second largest to second last
  * position and so on. This is done by comparing the adjacent elements and swapping them according to their value.
@@ -87,11 +117,15 @@ void selectionSort(long int *arr, long int len){
 void insertionSort(long int *arr, long int len){
 	long int i;
 
-	for(i = 1; i < len-1; i++){
+	for(i = 1; i < len; i++){
 		long int key = arr[i];			/* pick up element**/
 		long int j = i-1;
 		/** shifting of adjacent elements only if they are larger **/
-		while( j >= 0 && key > arr[j] )			arr[i] = arr[j--];
+		while( j >= 0 && key < arr[j] )		{
+			arr[j+1] = arr[j];
+			j--;
+		}
+
 		arr[j+1] = key;
 	}
 }
