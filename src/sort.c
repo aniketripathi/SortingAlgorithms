@@ -222,3 +222,36 @@ void heapSort(long int *arr, long int heapSize){
 }
 
 
+/**
+ * This function partitions the sub-array and returns the pivot. The partition scheme
+ * used is Lomuto partition scheme.
+ */
+static long int partition(long int *arr, long int p, long int r){
+	long int i = p - 1, j, x = arr[r];
+
+	for( j = p; j < r; j++){
+		if(arr[j] <= x){
+			long int temp  = arr[++i];
+					arr[i] = arr[j];
+					arr[j] = temp;
+		}
+	}
+		 arr[r] = arr[i + 1];
+		 arr[i + 1]	  = x;
+		 return (i+1);
+}
+
+
+/**
+ * Quick sorts works on divide and conquer technique. The arrays( or sub-arrays) are partitioned in
+ * such a way that it contains all smaller elements to the left of pivot element and all larger element
+ * to the right of pivot.
+ */
+void quickSort(long int *arr, long int begIndex, long int endIndex){
+
+if(begIndex < endIndex){
+	long int pivot = partition(arr, begIndex, endIndex);
+	quickSort(arr, begIndex, pivot - 1);
+	quickSort(arr, pivot + 1, endIndex);
+}
+}

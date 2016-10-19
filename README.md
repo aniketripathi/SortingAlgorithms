@@ -22,6 +22,8 @@ Sorting Algorithms
 
 5)	Heap Sort
 
+6)	Quick Sort
+
 
 
 version 1.0
