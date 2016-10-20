@@ -230,7 +230,7 @@ static long int partition(long int *arr, long int p, long int r){
 	long int i = p - 1, j, x = arr[r];
 
 	for( j = p; j < r; j++){
-		if(arr[j] <= x){
+		if( (arr[j] < x) || ( arr[j] == x && j < (p+r)/2) ){
 			long int temp  = arr[++i];
 					arr[i] = arr[j];
 					arr[j] = temp;
