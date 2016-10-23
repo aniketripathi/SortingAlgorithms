@@ -255,3 +255,31 @@ if(begIndex < endIndex){
 	quickSort(arr, pivot + 1, endIndex);
 }
 }
+
+
+
+
+/**
+ * Counting Sort works on the assumption that the range of numbers is between 1 to k. This algorithms is made
+ * according to the value k = 1000. It calculates the frequency of each number and stores them directly using their index.
+ * The sorted elements are stored in new array and this new array is returned.
+ */
+int* countingSort(int *arr, long int len){
+	const int K = 1000;
+	int frequency[K], j;
+	long int i;
+	/** clear out array **/
+	for(j = 0; j < K; j++)			frequency[j] = 0;
+
+	for(i = 0; i < len; i++)		++ frequency[arr[i] - 1] ;
+
+	/** find cumulative frequency, acts as position of elements in new array **/
+	for(j = 1; j < K; j++)			frequency[j] += frequency[j-1];
+
+	int *sortedarr = malloc(sizeof(int)*len);
+
+	for(i = 0; i < len; i++){
+		sortedarr[--frequency[arr[i] - 1]] = arr[i];
+	}
+	return sortedarr;
+}

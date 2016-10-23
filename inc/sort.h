@@ -25,5 +25,6 @@ void selectionSort(long int *arr, long int len);
 void mergeSort(long int *arr, long int lowerIndex, long int upperIndex);
 void heapSort(long int *arr, long int len);
 void quickSort(long int *arr, long int p, long int r);
+int* countingSort(int *arr, long int len);
 
 #endif /* SORT_H_ */
