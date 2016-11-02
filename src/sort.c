@@ -223,10 +223,43 @@ void heapSort(long int *arr, long int heapSize){
 
 
 /**
+ * This function partition the sub-array using Hoare Partition technique. It returns the
+ * pivot element.
+ */
+static long int hoarePartition(long int *arr, long int p, long int r){
+	long int x = arr[p], i = p+1, j = r;
+
+	while(1){
+	/** check for contiguous sub-arrays greater or smaller to pivot **/
+		while(arr[j] > x)	--j;
+		while(arr[i] < x && i <= r)		++i;
+	/** if any element doesn't fit into the sub-array swap them with element
+	 * of other sub-array
+	 */
+		if(i < j){
+			long int temp = arr[i];
+			arr[i] = arr[j];
+			arr[j] = temp;
+		 }
+
+	/** swap the pivot element to its correct position**/
+		else {
+		long int temp = arr[p];
+		arr[p] = arr[j];
+		arr[j] = temp;
+		return j;
+		}
+	}
+
+
+}
+
+
+/**
  * This function partitions the sub-array and returns the pivot. The partition scheme
  * used is Lomuto partition scheme.
  */
-static long int partition(long int *arr, long int p, long int r){
+static long int lumotuPartition(long int *arr, long int p, long int r){
 	long int i = p - 1, j, x = arr[r];
 
 	for( j = p; j < r; j++){
@@ -250,7 +283,7 @@ static long int partition(long int *arr, long int p, long int r){
 void quickSort(long int *arr, long int begIndex, long int endIndex){
 
 if(begIndex < endIndex){
-	long int pivot = partition(arr, begIndex, endIndex);
+	long int pivot = hoarePartition(arr, begIndex, endIndex);
 	quickSort(arr, begIndex, pivot - 1);
 	quickSort(arr, pivot + 1, endIndex);
 }
