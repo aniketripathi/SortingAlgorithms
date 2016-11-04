@@ -259,7 +259,7 @@ static long int hoarePartition(long int *arr, long int p, long int r){
  * This function partitions the sub-array and returns the pivot. The partition scheme
  * used is Lomuto partition scheme.
  */
-static long int lumotuPartition(long int *arr, long int p, long int r){
+static long int lomutoPartition(long int *arr, long int p, long int r){
 	long int i = p - 1, j, x = arr[r];
 
 	for( j = p; j < r; j++){
