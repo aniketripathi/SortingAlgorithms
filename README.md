@@ -28,9 +28,3 @@ The library includes implementation of basic sorting and searching algorithms. T
   6.  Quick Sort
 
   7.  Counting Sort
-
-
-
-  version 1.0
-
-
