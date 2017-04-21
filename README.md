@@ -1,9 +1,9 @@
 # SortingAlgorithms
 C implementation of sorting algorithms.
 
-The library includes basic sorting and searching algorithms. They are not well optimized and should be used only for educational purpose. The inc folder contains the header file sort.h and the src folder contains the source file sort.c. No separate file for searching algorithms.
+The library includes implementation of basic sorting and searching algorithms. They are not well optimized and should be used only for educational purpose. The inc folder contains the header file sort.h and the src folder contains the source file sort.c. No separate file for searching algorithms.
 
-###Searching Algorithms
+### Searching Algorithms
 
   1.  Linear Search
 
@@ -13,7 +13,7 @@ The library includes basic sorting and searching algorithms. They are not well o
 
 
 
-###Sorting Algorithms
+### Sorting Algorithms
 
   1.  Selection Sort
   
@@ -34,5 +34,3 @@ The library includes basic sorting and searching algorithms. They are not well o
   version 1.0
 
 
-
-__Author__: Aniket Kumar Tripathi.
