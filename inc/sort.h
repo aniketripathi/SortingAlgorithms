@@ -166,4 +166,30 @@ void quickSort(long int *arr, long int lowerIndex, long int upperIndex);
  */
 int* countingSort(int *arr, long int len);
 
+
+
+
+
+
+/**
+ * @brief Shell sort algorithm.
+ *
+ * The shell sort is a generalization algorithm of insertion sort. In this algorithm we take a gap sequence. A gap in a sequence is 
+ * the difference between every two numbers in the array. The algorithms selects the largest gap, and then assumes that elements in the
+ * array are located at distance of gap with respect to each other. It then sorts the the assumed array accordingly using insertion sort.
+ * The above sorting is performed for every gap sequence, where the last gap is 1. If sequence contains only one element i.e. 1 then it is
+ * an insertion sort.
+ * Performance of the algorithm depends upon the gap sequence.
+ *
+ * @param arr Array to be sorted
+ * @param len Length of the array
+ * 
+ * @return void. Returns nothing.
+**/
+void shellSort(long int *arr, long int len);
+
+
+
+
+
 #endif /* SORT_H_ */

@@ -316,3 +316,37 @@ int* countingSort(int *arr, long int len){
 	}
 	return sortedarr;
 }
+
+
+
+/**
+The shell sort is a generalization algorithm of insertion sort. In this algorithm we take a gap sequence. A gap in a sequence is 
+the difference between every two numbers in the array. The algorithms selects the largest gap, and then assumes that elements in the
+array are located at distance of gap with respect to each other. It then sorts the the assumed array accordingly using insertion sort.
+The above sorting is performed for every gap sequence, where the last gap is 1. If sequence contains only one element i.e. 1 then it is
+an insertion sort.
+
+Performance of the algorithm depends upon the gap sequence.
+
+**/
+void shellSort(long int *arr, long int len){
+
+    long int gap;
+
+    /**
+        Here the gap sequence is [len/2, len/4, len/8 ..... 1] which is very basic.
+        Other gap sequences are Pratt sequence, Hibbard, Frank & Lazarus, Knuth
+    **/
+    for(gap = len/2; gap >= 1; gap /= 2){
+        long int i;
+        for(i = gap; i < len; i++){                 // assume the first element is at gap position
+            long int temp = arr[i], j;
+           
+           for(j = i; j >= gap && arr[j - gap] > temp; j -= gap)    // sort relative to gap by insertion sort
+                arr[j] = arr[j - gap];
+
+            arr[j] = temp;
+        }
+    }
+}
+

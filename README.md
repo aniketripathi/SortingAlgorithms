@@ -28,3 +28,5 @@ The library includes implementation of basic sorting and searching algorithms. T
   6.  Quick Sort
 
   7.  Counting Sort
+
+  8.  Shell Sort
